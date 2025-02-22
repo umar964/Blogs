@@ -1,0 +1,63 @@
+ 
+.edit-blog {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-blog h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.edit-blog input,
+.edit-blog textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.edit-blog textarea {
+    height: 200px;
+    resize: vertical;
+}
+
+.edit-blog-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-blog-button{
+    background-color: red;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-top: 12px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    opacity: 0.8;
+}
+.cancel-blog-button:hover{
+    background-color: red;
+    opacity: 1;
+    
+}
+
+.edit-blog-button:hover {
+     opacity: 0.8;
+}
