@@ -9,6 +9,7 @@ function CreateAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const token = localStorage.getItem('token');
 
   const handleCreateAdmin = async (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ function CreateAdmin() {
         name,
         email,
         password
-      });
+      }, {headers: { Authorization: `Bearer ${token}` }} );
       setMessage(res.data.msg);
     } catch (error) {
       setMessage("Error: " + error.response.data.error);
