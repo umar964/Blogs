@@ -80,7 +80,7 @@ const AdminLogin = () => {
 
     return (
         <div className="admin-login-container">
-            <h2>Admin Login</h2>
+            <h2>Admins Login</h2>
             {error && <p className="admin-error">{error}</p>}
             <form onSubmit={handleLogin} className="admin-login-form">
                 <input
