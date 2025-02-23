@@ -98,7 +98,7 @@ function App() {
           } />
 
         <Route path="/create-admin" element={
-           <AdminProtected><CreateAdmin/></AdminProtected>
+           <CreateAdmin/>
           } />
            
 
