@@ -10,7 +10,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
  
 
 // Create Admin (Only 1 time)
-router.post("/create-admin",adminMiddleware, async (req, res) => {
+router.post("/create-admin", async (req, res) => {
     try {
       
         const { name, email, password } = req.body;
