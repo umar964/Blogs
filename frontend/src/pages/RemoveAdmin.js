@@ -7,13 +7,14 @@ const RemoveAdmin = () => {
     const [message, setMessage] = useState("");
 
     // const token  = localStorage.getItem('token');
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     const handleRemoveAdmin = async(e)=>{
         e.preventDefault();
         try{
             const confirmRemove = window.confirm("Are you sure to remove this admin");
             if(confirmRemove){
-                const res = await axios.post('http://localhost:5000/api/admin/remove-admin',{email}
+                const res = await axios.post(`${BACKEND_URL}/api/admin/remove-admin`,{email}
                     // {
                     //     headers: { Authorization: `Bearer ${token}` },
                     // }

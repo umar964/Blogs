@@ -71,7 +71,7 @@ const AdminLogin = () => {
         setError("");
 
         try {
-            const response = await axios.post(`${BACKEND_URL}api/admin/admin-login`, { email, password });
+            const response = await axios.post(`${BACKEND_URL}/api/admin/admin-login`, { email, password });
 
             localStorage.setItem("token", response.data.token); // Store token
             localStorage.setItem("isAdmin", "true"); // Store admin status
