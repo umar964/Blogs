@@ -11,10 +11,12 @@ function CreateAdmin() {
   const [message, setMessage] = useState("");
   const token = localStorage.getItem('token');
 
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
   const handleCreateAdmin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/create-admin", {
+      const res = await axios.post(`${BACKEND_URL}/api/admin/create-admin`, {
         name,
         email,
         password

@@ -7,8 +7,9 @@ const Home = () => {
     const [blogs, setBlogs] = useState([]);
 // setBlogs is a fun and when this fun will call then content will store in blogs
     useEffect(() => {
+        const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
         //  fetch all blogs from blogRoutes
-        axios.get('http://localhost:5000/api/blogs')
+        axios.get(`${BACKEND_URL}/api/blogs`)
             .then(response => {
                  
                 setBlogs(response.data || []); 
