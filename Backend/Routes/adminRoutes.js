@@ -60,7 +60,7 @@ router.post("/admin-login", async (req, res) => {
 router.post("/remove-admin",async(req,res)=>{
     const  {email} = req.body;
     try{
-        console.log("email at admin routes",email);
+       
         const admin = await User.findOneAndDelete({email});
          
         if(!admin){
