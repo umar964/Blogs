@@ -25,6 +25,7 @@ function App() {
   // setQuery is a fun and when on it's call query content will store in query
   const [query,setQuery] = useState("");
   const [searchResults,setSearchResults] = useState([])
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 
   const handleSearch = async (e) => {
@@ -35,7 +36,7 @@ function App() {
     try {
 
       //  send the query to search-blogs in blogRoutes and fetch blogs from backend 
-      const response = await axios.post("http://localhost:5000/api/blogs/search-blogs", {query});
+      const response = await axios.post(`${BACKEND_URL}/api/blogs/search-blogs`, {query});
      
     
       setSearchResults(response.data || []);
@@ -89,33 +90,25 @@ function App() {
         </div>
       </nav>
       <Routes>
-        <Route path="/" element={
-            <Home/> 
-          } />
 
-      <Route path="/search" element={
-            <SearchBlogs searchResults={searchResults}/> 
-          } />
+      <Route path="/" element={<Home/>} />
 
-        <Route path="/create-admin" element={
-            <AdminProtected><CreateAdmin/></AdminProtected>
-          } />
+      <Route path="/search" element={<SearchBlogs searchResults={searchResults}/>} />
+
+        <Route path="/create-admin" element={<AdminProtected><CreateAdmin/></AdminProtected>} />
            
 
-        <Route path="/remove-admin" element={
-           <AdminProtected><RemoveAdmin/></AdminProtected>
-          } />
+        <Route path="/remove-admin" element={<AdminProtected><RemoveAdmin/></AdminProtected>} />
 
 
         <Route path="/login-admin" element={<AdminLogin/>} />
 
         <Route path="/blog/:id" element={<BlogDetails />} />
-        <Route path="/create" element={
-           <AdminProtected><CreateBlog /></AdminProtected>
-          } />
-        <Route path="/edit/:id" element={
-             <AdminProtected><EditBlog/></AdminProtected> 
-          } />
+
+        <Route path="/create" element={<AdminProtected><CreateBlog /></AdminProtected>} />
+
+        <Route path="/edit/:id" element={<AdminProtected><EditBlog/></AdminProtected>} />
+        
       </Routes>
     </>
   );
