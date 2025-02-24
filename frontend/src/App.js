@@ -85,7 +85,7 @@ function App() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            <button id="search-btn" type="submit">Search</button>
+            // <button id="search-btn" type="submit">Search</button>
           </form>
         </div>
       </nav>
