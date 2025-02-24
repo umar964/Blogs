@@ -20,6 +20,11 @@ app.use(cors());
 //  we can  use all blogRoutes after /api/blogs and similarly with adminRoutes
 app.use('/api/blogs', blogRoutes);
 app.use("/api/admin", adminRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
+
  
 
 //  Connect to MongoDB 
