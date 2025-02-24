@@ -63,7 +63,7 @@ function App() {
       <nav>
          
         <div className="nav-div">
-        <Link to="/">Home</Link>
+        <Link to="/">Home  ss</Link>
         {token && isAdmin === "true" && (
           <>
            <Link to="/create">Create Blog</Link>
