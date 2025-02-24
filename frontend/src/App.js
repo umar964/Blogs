@@ -63,7 +63,7 @@ function App() {
       <nav>
          
         <div className="nav-div">
-        <Link to="/">Home aa</Link>
+        <Link to="/">Home</Link>
         {token && isAdmin === "true" && (
           <>
            <Link to="/create">Create Blog</Link>
@@ -98,7 +98,7 @@ function App() {
           } />
 
         <Route path="/create-admin" element={
-           <CreateAdmin/>
+            <AdminProtected><CreateAdmin/></AdminProtected>
           } />
            
 

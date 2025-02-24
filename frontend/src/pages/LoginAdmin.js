@@ -63,12 +63,15 @@ const AdminLogin = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
 
         try {
-            const response = await axios.post("http://localhost:5000/api/admin/admin-login", { email, password });
+            const response = await axios.post(`${BACKEND_URL}api/admin/admin-login`, { email, password });
 
             localStorage.setItem("token", response.data.token); // Store token
             localStorage.setItem("isAdmin", "true"); // Store admin status

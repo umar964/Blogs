@@ -14,9 +14,10 @@ const BlogDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/blogs/${id}`)
+        axios.get(`${BACKEND_URL}/api/blogs/${id}`)
             .then(response => {
                 setBlog(response.data);
                 setLoading(false);
@@ -26,7 +27,7 @@ const BlogDetails = () => {
                 setLoading(false);
             });
         
-        axios.get(`http://localhost:5000/api/blogs`)
+        axios.get(`${BACKEND_URL}/api/blogs`)
             .then(response => {
                 setBlogs(response.data);
             })
@@ -43,7 +44,7 @@ const BlogDetails = () => {
     const handleDelete = () => {
       const confirmDelete = window.confirm("Are you sure you want to delete this blog?");
       if (confirmDelete){
-          axios.delete(`http://localhost:5000/api/blogs/${id}`, {
+          axios.delete(`${BACKEND_URL}/api/blogs/${id}`, {
               headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => navigate("/"))

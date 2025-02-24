@@ -14,13 +14,14 @@ const CreateBlog = () => {
     const [error, setError] = useState(null);  // To store any error message
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
+    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
  
 
    
     useEffect(() => {
         //  get the API_URL and API_KEY from backend .env file through config route
-        axios.get("http://localhost:5000/api/blogs/config")  
+        axios.get(`${BACKEND_URL}/api/blogs/config`)  
             .then((res) => setApiConfig(res.data))
             .catch((err) => console.error("Error fetching API config:", err));
     }, []);
@@ -85,7 +86,7 @@ const CreateBlog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/api/blogs", {
+            const response = await axios.post(`${BACKEND_URL}/api/blogs`, {
                 title,
                 content:  content,   
                 author,

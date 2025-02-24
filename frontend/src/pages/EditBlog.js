@@ -9,10 +9,11 @@ function EditBlog() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
   useEffect(() => {
     // fetch blog by their id for update
-    axios.get(`http://localhost:5000/api/blogs/${id}`)
+    axios.get(`${BACKEND_URL}/api/blogs/${id}`)
       .then(res => {
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -23,7 +24,7 @@ function EditBlog() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:5000/api/blogs/${id}`, { title, content, author })
+    axios.put(`${BACKEND_URL}/api/blogs/${id}`, { title, content, author })
       .then(() => navigate(`/blog/${id}`))
       .catch(err => console.error("Error updating blog:", err));
   };
