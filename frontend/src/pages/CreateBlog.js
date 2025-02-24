@@ -25,6 +25,8 @@ const CreateBlog = () => {
             .then((res) => setApiConfig(res.data))
             .catch((err) => console.error("Error fetching API config:", err));
     }, []);
+
+
     
     
  
@@ -41,7 +43,7 @@ const CreateBlog = () => {
         }
 
         if (!apiConfig.API_URL || !apiConfig.API_KEY) {
-            console.error("API config not loaded");
+            alert("API config not loaded");
             return;
         }
     
