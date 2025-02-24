@@ -85,7 +85,7 @@ function App() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
-            
+             
           </form>
         </div>
       </nav>
@@ -108,7 +108,7 @@ function App() {
         <Route path="/create" element={<AdminProtected><CreateBlog /></AdminProtected>} />
 
         <Route path="/edit/:id" element={<AdminProtected><EditBlog/></AdminProtected>} />
-        
+
       </Routes>
     </>
   );
