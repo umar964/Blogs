@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 // //  Get a single blog by  blog slug  and this will fetch the blog when u click on title on home page
 router.get('/:slug',  async (req, res) => {
     try {
-        
+        console.log("slug at blogRoutes",req.params.slug);
         const blog = await Blog.findOne({ slug: req.params.slug }); 
         if (!blog) {
             return res.status(404).json({ message: 'Blog Not Found' });
