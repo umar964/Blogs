@@ -36,13 +36,23 @@ router.get('/:slug',  async (req, res) => {
     }
 });
 
-//  for creating the blogs and  and only admin can create a blog
-router.post('/',adminMiddleware, async (req, res) => {
-    const { title, content, author } = req.body;
-    const newBlog = new Blog({ title, content, author });
-    await newBlog.save();
-    res.status(201).json(newBlog);
+//  for creating the blogs and  and only admin can  
+router.post('/', adminMiddleware, async (req, res) => {
+    try {
+        const { title, content, author } = req.body;
+
+        // Naya blog create karo
+        const newBlog = new Blog({ title, content, author });
+
+        // Save karne se pehle slug middleware trigger hoga
+        await newBlog.save();
+
+        res.status(201).json(newBlog);
+    } catch (error) {
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
 });
+
 
 // // Delete a blog
 router.delete('/:slug',adminMiddleware, async (req, res) => {
@@ -54,15 +64,22 @@ router.delete('/:slug',adminMiddleware, async (req, res) => {
 
 
 // update a blog
-router.put('/:slug' , async (req, res) => {
+router.put('/:slug', async (req, res) => {
     const { title, content, author } = req.body;
-    const blog = await Blog.findOneAndUpdate({slug:req.params.slug},
-        { title, content, author },
-        { new: true } // Yeh update ke baad updated data return karega
-    );
+
+    let blog = await Blog.findOne({ slug: req.params.slug });
     if (!blog) return res.status(404).json({ message: 'Blog not found' });
+
+    // Update fields
+    blog.title = title;
+    blog.content = content;
+    blog.author = author;
+
+    await blog.save(); // Ye middleware ko trigger karega aur slug bhi update hoga
+
     res.json(blog);
 });
+
 
 
 // search a blog
