@@ -4,7 +4,7 @@ import axios from "axios";
 import './EditBlog.css';  
 
 function EditBlog() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -13,7 +13,7 @@ function EditBlog() {
 
   useEffect(() => {
     // fetch blog by their id for update
-    axios.get(`${BACKEND_URL}/api/blogs/${id}`)
+    axios.get(`${BACKEND_URL}/api/blogs/${slug}`)
       .then(res => {
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -24,8 +24,8 @@ function EditBlog() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios.put(`${BACKEND_URL}/api/blogs/${id}`, { title, content, author })
-      .then(() => navigate(`/blog/${id}`))
+    axios.put(`${BACKEND_URL}/api/blogs/${title}`, { title, content, author })
+      .then(() => navigate(`/blog/${title}`))
       .catch(err => console.error("Error updating blog:", err));
   };
 

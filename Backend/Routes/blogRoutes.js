@@ -45,19 +45,18 @@ router.post('/',adminMiddleware, async (req, res) => {
 });
 
 // // Delete a blog
-router.delete('/:id',adminMiddleware, async (req, res) => {
+router.delete('/:slug',adminMiddleware, async (req, res) => {
    
-    const blog = await Blog.findByIdAndDelete(req.params.id);
+    const blog = await Blog.find({slug:req.params.slug});
     if (!blog) return res.status(404).json({ message: 'Blog not found' });
     res.json({ message: 'Blog deleted successfully' });
 });
 
 
 // update a blog
-router.put('/:id' , async (req, res) => {
+router.put('/:slug' , async (req, res) => {
     const { title, content, author } = req.body;
-    const blog = await Blog.findByIdAndUpdate(
-        req.params.id,
+    const blog = await Blog.find({slug:req.params.slug},
         { title, content, author },
         { new: true } // Yeh update ke baad updated data return karega
     );

@@ -8,7 +8,8 @@ import rehypeRaw from 'rehype-raw';
 import './BlogDetails.css';
 
 const BlogDetails = () => {
-    const { id } = useParams();
+    const { slug } = useParams();
+    
     const [blog, setBlog] = useState(null);
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ const BlogDetails = () => {
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
     useEffect(() => {
-        axios.get(`${BACKEND_URL}/api/blogs/${id}`)
+        axios.get(`${BACKEND_URL}/api/blogs/${slug}`)
             .then(response => {
                 setBlog(response.data);
                 setLoading(false);
@@ -44,7 +45,7 @@ const BlogDetails = () => {
     const handleDelete = () => {
       const confirmDelete = window.confirm("Are you sure you want to delete this blog?");
       if (confirmDelete){
-          axios.delete(`${BACKEND_URL}/api/blogs/${id}`, {
+          axios.delete(`${BACKEND_URL}/api/blogs/${slug}`, {
               headers: { Authorization: `Bearer ${token}` },
           })
           .then(() => navigate("/"))
@@ -58,7 +59,7 @@ const BlogDetails = () => {
 
   const relatedBlogs = blog && blogs.length > 0 ? 
     blogs.filter(b => {
-        if (b._id === blog._id) return false; // Exclude current blog
+        if (b.slug === blog.slug) return false; // Exclude current blog
         const blogWords = blog.title.toLowerCase().split(" "); // Split current title into words
         
        
@@ -77,7 +78,8 @@ const BlogDetails = () => {
         return content.replace(/\[(.*?)\]/g, (match, title) => {
             const foundBlog = blogs.find(b => b.title === title);
             if (foundBlog) {
-                return `[${title}](/blog/${foundBlog._id})`; // Convert title to correct blog ID link
+                 
+                return `[${title}](/blog/${foundBlog.slug})`; // Convert title to correct blog slug link
             }
             return match;
         });
@@ -112,7 +114,7 @@ const BlogDetails = () => {
                     <ul>
                         {relatedBlogs.map((relatedBlog) => (
                             <li key={relatedBlog._id}>
-                                <Link to={`/blog/${relatedBlog._id}`} style={{ textDecoration: "none", color: "black",fontSize: "1.2rem" }}>
+                                <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black",fontSize: "1.2rem" }}>
                                     {relatedBlog.title}
                                 </Link>
                             </li>
@@ -125,7 +127,7 @@ const BlogDetails = () => {
             {token && isAdmin === "true" && (
                 <>
                     <button className="blog-details-edit-button">
-                        <Link to={`/edit/${id}`} style={{ textDecoration: "none", color: "black" }}>
+                        <Link to={`/edit/${blog.slug}`} style={{ textDecoration: "none", color: "black" }}>
                             Edit Blog
                         </Link>
                     </button>

@@ -34,7 +34,7 @@ const Home = () => {
                     <div key={blog._id} className="blog-card">
                         <h2 className="blog-card-title">
                             <Link to={`/blog/${blog.slug}`} className="blog-card-link">
-                                {blog.title}
+                                {blog.title} 
                             </Link>
                         </h2>
                         <p className="blog-card-content">{blog.content.substring(0, 100)}...</p>
