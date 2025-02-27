@@ -22,10 +22,10 @@ router.get('/', async (req, res) => {
 });
 
 
-// //  Get a single blog by  blog ID  and this will fetch the blog when u click on title on home page
+// //  Get a single blog by  blog slug  and this will fetch the blog when u click on title on home page
 router.get('/:slug',  async (req, res) => {
     try {
-        // const blog = await Blog.findById(req.params.id);
+        
         const blog = await Blog.findOne({ slug: req.params.slug }); 
         if (!blog) {
             return res.status(404).json({ message: 'Blog Not Found' });
@@ -47,7 +47,7 @@ router.post('/',adminMiddleware, async (req, res) => {
 // // Delete a blog
 router.delete('/:slug',adminMiddleware, async (req, res) => {
    
-    const blog = await Blog.find({slug:req.params.slug});
+    const blog = await Blog.findOne({slug:req.params.slug});
     if (!blog) return res.status(404).json({ message: 'Blog not found' });
     res.json({ message: 'Blog deleted successfully' });
 });
@@ -56,7 +56,7 @@ router.delete('/:slug',adminMiddleware, async (req, res) => {
 // update a blog
 router.put('/:slug' , async (req, res) => {
     const { title, content, author } = req.body;
-    const blog = await Blog.find({slug:req.params.slug},
+    const blog = await Blog.findOne({slug:req.params.slug},
         { title, content, author },
         { new: true } // Yeh update ke baad updated data return karega
     );
