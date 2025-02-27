@@ -118,7 +118,7 @@ const BlogDetails = () => {
                              
                             <li key={relatedBlog._id}>
                                 <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black",fontSize: "1.2rem" }}>
-                                    {relatedBlog.slug}
+                                    {relatedBlog.author}
                                 </Link>
                             </li>
                         ))}

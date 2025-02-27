@@ -103,7 +103,7 @@ function App() {
 
         <Route path="/login-admin" element={<AdminLogin/>} />
 
-        <Route path="/blog/:slug" element={<BlogDetails />} />
+        <Route path="/blog/:slug" element={<BlogDetails/>} />
 
         <Route path="/create" element={<AdminProtected><CreateBlog /></AdminProtected>} />
 
