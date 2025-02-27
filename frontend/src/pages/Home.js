@@ -37,7 +37,10 @@ const Home = () => {
                                 {blog.title} 
                             </Link>
                         </h2>
-                        <p className="blog-card-content">{blog.content.substring(0, 100)}...</p>
+                        <p className="blog-card-content">
+                            {blog.content.length>100 ? blog.content.substring(0, 100) + "...":blog.content}
+                        </p>
+                        <Link to={`/blog/${blog.slug}`} className="read-more">Read More</Link>
                     </div>
                 ))
             )}

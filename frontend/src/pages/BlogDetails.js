@@ -118,8 +118,12 @@ const BlogDetails = () => {
                              
                             <li key={relatedBlog._id}>
                                 <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black",fontSize: "1.2rem" }}>
-                                    {relatedBlog.author}
+                                    {relatedBlog.title}
                                 </Link>
+                                <p className='blog-card-content'>
+                                    { relatedBlog.content.length > 100 ? relatedBlog.content.substring(0,100) + "...":relatedBlog.content}
+                                </p>
+                                <Link to = {`/blog/${relatedBlog.slug}`}>Read More</Link>
                             </li>
                         ))}
                     </ul>
