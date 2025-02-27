@@ -46,8 +46,8 @@ router.post('/',adminMiddleware, async (req, res) => {
 
 // // Delete a blog
 router.delete('/:slug',adminMiddleware, async (req, res) => {
-   
-    const blog = await Blog.findOne({slug:req.params.slug});
+    const blog = await Blog.findOneAndDelete({ slug: req.params.slug }); 
+     
     if (!blog) return res.status(404).json({ message: 'Blog not found' });
     res.json({ message: 'Blog deleted successfully' });
 });
@@ -56,7 +56,7 @@ router.delete('/:slug',adminMiddleware, async (req, res) => {
 // update a blog
 router.put('/:slug' , async (req, res) => {
     const { title, content, author } = req.body;
-    const blog = await Blog.findOne({slug:req.params.slug},
+    const blog = await Blog.findOneAndUpdate({slug:req.params.slug},
         { title, content, author },
         { new: true } // Yeh update ke baad updated data return karega
     );
