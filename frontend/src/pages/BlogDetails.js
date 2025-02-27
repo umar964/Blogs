@@ -30,7 +30,7 @@ const BlogDetails = () => {
         
         axios.get(`${BACKEND_URL}/api/blogs`)
             .then(response => {
-                setBlogs(response.data);
+                setBlogs(response.data || []);
             })
             .catch(() => {
                 setError('Error fetching blogs');
@@ -108,23 +108,23 @@ const BlogDetails = () => {
 
 
             {relatedBlogs.map((relatedBlog) => {
-    console.log("Slug of Related Blog:", relatedBlog.slug); // ✅ Debug
+             console.log("Slug of Related Blog:", relatedBlog); // ✅ Debug
 
-    return (
-        <li key={relatedBlog._id}>
-            <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black", fontSize: "1.2rem" }}>
+            return (
+            <li key={relatedBlog._id}>
+                <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black", fontSize: "1.2rem" }}>
                 {relatedBlog.title}
-            </Link>
-        </li>
-    );
-    })}
+                </Link>
+            </li>
+                );
+             })}
 
          
 
-            {relatedBlogs.length > 0 && (
+            {/* {relatedBlogs.length > 0 && (
                 <div className="related-blogs">
                     <h3>Related Blogs:</h3>
-                    <ul>
+                    <ul> */}
                         {/* {relatedBlogs.map((relatedBlog) => (
                              
                             <li key={relatedBlog._id}>
@@ -133,8 +133,8 @@ const BlogDetails = () => {
                                 </Link>
                             </li>
                         ))} */}
-                        {relatedBlogs.map((relatedBlog) => {
-                          console.log("Slug of Related Blog:", relatedBlog.slug); // ✅ Debug
+                        {/* {relatedBlogs.map((relatedBlog) => {
+                          console.log("Slug of Related Blog:", relatedBlog.slug);  
 
                       return (
                             <li key={relatedBlog._id}>
@@ -143,11 +143,11 @@ const BlogDetails = () => {
                             </Link>
                            </li>
                                );
-                             })}
+                             })} */}
 
-                    </ul>
+                    {/* </ul>
                 </div>
-            )}
+            )} */}
 
             {/* Admin options */}
             {token && isAdmin === "true" && (
