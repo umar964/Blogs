@@ -24,8 +24,8 @@ function EditBlog() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios.put(`${BACKEND_URL}/api/blogs/${title}`, { title, content, author })
-      .then(() => navigate(`/blog/${title}`))
+    axios.put(`${BACKEND_URL}/api/blogs/${slug}`, { title, content, author })
+      .then(() => navigate('/'))
       .catch(err => console.error("Error updating blog:", err));
   };
 
