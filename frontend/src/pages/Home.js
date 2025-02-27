@@ -7,6 +7,10 @@ const Home = () => {
     const [blogs, setBlogs] = useState([]);
 // setBlogs is a fun and when this fun will call then content will store in blogs
     useEffect(() => {
+
+        document.title = "Latest Blogs - Blogify";
+
+
         const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
         //  fetch all blogs from blogRoutes
         axios.get(`${BACKEND_URL}/api/blogs`)
@@ -21,7 +25,7 @@ const Home = () => {
     return (
         <div className="home-container">
         
-            {/* <h1 className="home-title">All Blogs</h1> */}
+           
             {blogs.length === 0 ? (
                 <p className="home-empty-message">No blogs found.</p>
             ) : (
@@ -29,7 +33,7 @@ const Home = () => {
                 blogs.map(blog => (
                     <div key={blog._id} className="blog-card">
                         <h2 className="blog-card-title">
-                            <Link to={`/blog/${blog._id}`} className="blog-card-link">
+                            <Link to={`/blog/${blog.slug}`} className="blog-card-link">
                                 {blog.title}
                             </Link>
                         </h2>
