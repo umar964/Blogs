@@ -107,17 +107,7 @@ const BlogDetails = () => {
             </div>
 
 
-            {relatedBlogs.map((relatedBlog) => {
-             console.log("Slug of Related Blog:", relatedBlog); // ✅ Debug
-
-            return (
-            <li key={relatedBlog._id}>
-                <Link to={`/blog/${slug}`} style={{ textDecoration: "none", color: "black", fontSize: "1.2rem" }}>
-                {relatedBlog.title}
-                </Link>
-            </li>
-                );
-             })}
+       
 
          
             {relatedBlogs.length > 0 && (
