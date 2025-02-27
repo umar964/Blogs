@@ -20,7 +20,7 @@ function EditBlog() {
         setAuthor(res.data.author);
       })
       .catch(err => console.error("Error fetching blog:", err));
-  }, [id]);
+  }, [slug]);
 
   const handleUpdate = (e) => {
     e.preventDefault();
