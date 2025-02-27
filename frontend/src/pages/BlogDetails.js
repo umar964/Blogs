@@ -120,34 +120,24 @@ const BlogDetails = () => {
              })}
 
          
-
-            {/* {relatedBlogs.length > 0 && (
+            {relatedBlogs.length > 0 && (
                 <div className="related-blogs">
                     <h3>Related Blogs:</h3>
-                    <ul> */}
-                        {/* {relatedBlogs.map((relatedBlog) => (
+                    <ul>
+                        {relatedBlogs.map((relatedBlog) => (
                              
                             <li key={relatedBlog._id}>
                                 <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black",fontSize: "1.2rem" }}>
-                                    {relatedBlog.title}
+                                    {relatedBlog.slug}
                                 </Link>
                             </li>
-                        ))} */}
-                        {/* {relatedBlogs.map((relatedBlog) => {
-                          console.log("Slug of Related Blog:", relatedBlog.slug);  
-
-                      return (
-                            <li key={relatedBlog._id}>
-                         <Link to={`/blog/${relatedBlog.slug}`} style={{ textDecoration: "none", color: "black", fontSize: "1.2rem" }}>
-                         {relatedBlog.title}
-                            </Link>
-                           </li>
-                               );
-                             })} */}
-
-                    {/* </ul>
+                        ))}
+                    </ul>
                 </div>
-            )} */}
+            )}
+                   
+
+             
 
             {/* Admin options */}
             {token && isAdmin === "true" && (
