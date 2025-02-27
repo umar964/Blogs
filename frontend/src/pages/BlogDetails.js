@@ -35,7 +35,7 @@ const BlogDetails = () => {
             .catch(() => {
                 setError('Error fetching blogs');
             });
-    }, [id]);
+    }, [slug]);
  
 
     const token = localStorage.getItem("token");
