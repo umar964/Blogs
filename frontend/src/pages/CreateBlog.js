@@ -96,7 +96,7 @@ const CreateBlog = () => {
             {headers: { Authorization: `Bearer ${token}` }}
         );
             alert("Blog added successfully!");
-            navigate(`/blog/${response.data._id}`);
+            navigate("/");
         } catch (error) {
             console.error("Error adding blog:", error);
             setError("Error adding blog. Try again later.");
