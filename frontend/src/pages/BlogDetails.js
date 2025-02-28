@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import './BlogDetails.css';
+import { FaTrash,FaEdit,FaCopy } from "react-icons/fa";
 
 const BlogDetails = () => {
     const { slug } = useParams();
@@ -52,6 +53,11 @@ const BlogDetails = () => {
           .catch(err => console.error("Error deleting blog:", err));
       }
   };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(blog.content,blog.title);
+    alert("Content copied!");
+};
  
 
   
@@ -96,7 +102,17 @@ const BlogDetails = () => {
 
     return (
         <div className="blog-details">
-            <h1 className="blog-details-title">{blog.title}</h1>
+             <div className='title-div'> 
+             <h1 className="blog-details-title">{blog.title}</h1>
+             <div className='blog-options' >
+                <Link to={`/edit/${blog.slug}`} className='opt-button'><FaEdit size={20}/></Link>
+                <button onClick={handleDelete} className='opt-button'><FaTrash  size={15} textDecoration={NaN} /></button>
+                {/* <Link to={`/edit/${blog.slug}`}><FaEye/></Link> */}
+                <button onClick={handleCopy} className="opt-button">
+                <FaCopy size={15} /> Copy
+                </button>
+             </div>
+             </div>
             <p className="blog-details-author"><strong>Author :</strong> {blog.author}</p>
 
             {/* 🔹 Render markdown content with transformed links */}
@@ -121,9 +137,10 @@ const BlogDetails = () => {
                                     {relatedBlog.title}
                                 </Link>
                                 <p className='blog-card-content'>
-                                    { relatedBlog.content.length > 100 ? relatedBlog.content.substring(0,100) + "...":relatedBlog.content}
+                                    { relatedBlog.content.length > 100 ? relatedBlog.content.substring(0,100) + "... ":relatedBlog.content}
+                                    <Link to = {`/blog/${relatedBlog.slug}` } className="read-more" style ={{color : "green",textDecoration: "none"}}>  Read More</Link>
                                 </p>
-                                <Link to = {`/blog/${relatedBlog.slug}`}>Read More</Link>
+                                
                             </li>
                         ))}
                     </ul>

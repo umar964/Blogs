@@ -2,6 +2,7 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+   
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -10,6 +11,41 @@
     white-space: normal;
     line-height: 1.6;  
     font-size: 16px;  
+}
+.title-div{
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+    /* background:green; */
+    align-items: center;
+}
+
+.opt-button {
+    background: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: black;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.opt-button:hover {
+    color: gray;
+}
+
+.blog-options{
+    height: 33px;
+    width: 140px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+     
+    
+    margin-top: 20px;
+     
+
 }
 
 .blog-details p {
