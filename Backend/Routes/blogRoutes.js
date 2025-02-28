@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Redis = require('ioredis');
-const redis = new Redis();
+// const Redis = require('ioredis');
+// const redis = new Redis();
 const Blog = require('../models/Blog');
 const User = require("../models/userModel");
 const  adminMiddleware = require('../middleware/adminMiddleware');
@@ -20,14 +20,14 @@ router.get("/config", (req, res) => {
 // fetch all blogs
 router.get('/', async (req, res) => {
      try{
-        const cachedBlogs = await redis.get("all_blogs");
-    if(cachedBlogs){
-        console.log("Serving blogs from cache");
-        return res.json(JSON.parse(cachedBlogs));
-    }
+    //     const cachedBlogs = await redis.get("all_blogs");
+    // if(cachedBlogs){
+    //     console.log("Serving blogs from cache");
+    //     return res.json(JSON.parse(cachedBlogs));
+    // }
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
-    redis.set("all_blogs", JSON.stringify(blogs));
+    // redis.set("all_blogs", JSON.stringify(blogs));
     res.json(blogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
@@ -61,7 +61,7 @@ router.post('/', adminMiddleware, async (req, res) => {
         // Save karne se pehle slug middleware trigger hoga
         await newBlog.save();
         // Clear cache so that new blogs appear immediately
-        redis.del("all_blogs");
+        // redis.del("all_blogs");
 
         res.status(201).json(newBlog);
     } catch (error) {
