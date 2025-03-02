@@ -10,7 +10,7 @@ require("dotenv").config();
 
 const API_KEY = process.env.API_KEY;
 const API_URL = process.env.API_URL;
-const REDIS_URL = process.env.REDIS_URL;
+// const REDIS_URL = process.env.REDIS_URL;
 
 //  this will send API_URL and API_KEY to frontend
 router.get("/config", (req, res) => {
