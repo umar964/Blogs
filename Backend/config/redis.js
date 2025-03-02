@@ -1,10 +1,11 @@
-import Redis from "ioredis";
+import { Redis } from "@upstash/redis";
 
-const redis = new Redis(process.env.UPSTASH_REDIS_URL, {
-  tls: { rejectUnauthorized: false }, // Required for Upstash
+const redis = new Redis({
+    url:process.env.UPSTASH_REDIS_URL 
 });
 
-redis.on("error", (err) => console.error("Redis Error:", err));
-
 export default redis;
+
+
+
 
