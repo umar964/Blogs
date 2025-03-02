@@ -1,10 +1,13 @@
-const { Redis } = require("@upstash/redis");
+import { Redis } from "@upstash/redis";
+
+console.log("🔍 Redis URL:", process.env.UPSTASH_REDIS_URL); // ✅ Debugging
 
 const redis = new Redis({
-    url: process.env.UPSTASH_REDIS_URL,
+    url: process.env.UPSTASH_REDIS_URL, // 🛑 Check if this is undefined
 });
 
-module.exports = redis; // ✅ Exporting the redis instance properly
+export default redis;
+
 
 
 
