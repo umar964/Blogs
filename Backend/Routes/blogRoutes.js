@@ -3,7 +3,7 @@ const router = express.Router();
  
  
 const Blog = require('../models/Blog');
-const redis = require('../config/redis');
+// const redis = require('../config/redis');
 const User = require("../models/userModel");
 const  adminMiddleware = require('../middleware/adminMiddleware');
 require("dotenv").config();
@@ -22,14 +22,14 @@ router.get("/config", (req, res) => {
 // fetch all blogs
 router.get('/', async (req, res) => {
      try{
-        const cachedBlogs = await redis.get("all_blogs");
-     if(cachedBlogs){
-        console.log("Serving blogs from cache");
-        return res.json(JSON.parse(cachedBlogs));
-    }
+    //     const cachedBlogs = await redis.get("all_blogs");
+    //  if(cachedBlogs){
+    //     console.log("Serving blogs from cache");
+    //     return res.json(JSON.parse(cachedBlogs));
+    // }
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
-    await redis.set("all_blogs", JSON.stringify(blogs));
+    // await redis.set("all_blogs", JSON.stringify(blogs));
     res.json(blogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
