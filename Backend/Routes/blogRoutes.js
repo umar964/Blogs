@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const redis = require('../config/redis');
+ 
  
 const Blog = require('../models/Blog');
+const redis = require('../config/redis');
 const User = require("../models/userModel");
 const  adminMiddleware = require('../middleware/adminMiddleware');
 require("dotenv").config();
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
     }
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
-    redis.set("all_blogs", JSON.stringify(blogs));
+    await redis.set("all_blogs", JSON.stringify(blogs));
     res.json(blogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
