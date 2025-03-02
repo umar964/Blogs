@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// const Redis = require('ioredis');
-// const redis = new Redis();
+const redis = require('../config/redis');
+ 
 const Blog = require('../models/Blog');
 const User = require("../models/userModel");
 const  adminMiddleware = require('../middleware/adminMiddleware');
@@ -9,6 +9,7 @@ require("dotenv").config();
 
 const API_KEY = process.env.API_KEY;
 const API_URL = process.env.API_URL;
+const REDIS_URL = process.env.REDIS_URL;
 
 //  this will send API_URL and API_KEY to frontend
 router.get("/config", (req, res) => {
@@ -20,14 +21,14 @@ router.get("/config", (req, res) => {
 // fetch all blogs
 router.get('/', async (req, res) => {
      try{
-    //     const cachedBlogs = await redis.get("all_blogs");
-    // if(cachedBlogs){
-    //     console.log("Serving blogs from cache");
-    //     return res.json(JSON.parse(cachedBlogs));
-    // }
+        const cachedBlogs = await redis.get("all_blogs");
+    if(cachedBlogs){
+        console.log("Serving blogs from cache");
+        return res.json(JSON.parse(cachedBlogs));
+    }
     const blogs = await Blog.find().sort({ createdAt: -1 });
 
-    // redis.set("all_blogs", JSON.stringify(blogs));
+    redis.set("all_blogs", JSON.stringify(blogs));
     res.json(blogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
@@ -39,7 +40,7 @@ router.get('/', async (req, res) => {
 // //  Get a single blog by  blog slug  and this will fetch the blog when u click on title on home page
 router.get('/:slug',  async (req, res) => {
     try {
-        console.log("slug at blogRoutes",req.params.slug);
+         
         const blog = await Blog.findOne({ slug: req.params.slug }); 
         if (!blog) {
             return res.status(404).json({ message: 'Blog Not Found' });
