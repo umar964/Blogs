@@ -22,7 +22,7 @@ router.get("/config", (req, res) => {
 router.get('/', async (req, res) => {
      try{
         const cachedBlogs = await redis.get("all_blogs");
-    if(cachedBlogs){
+     if(cachedBlogs){
         console.log("Serving blogs from cache");
         return res.json(JSON.parse(cachedBlogs));
     }
