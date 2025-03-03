@@ -1,16 +1,13 @@
 const express = require('express');
 const router = express.Router();
- 
- 
 const Blog = require('../models/Blog');
-// const redis = require('../config/redis');
 const User = require("../models/userModel");
 const  adminMiddleware = require('../middleware/adminMiddleware');
 require("dotenv").config();
 
 const API_KEY = process.env.API_KEY;
 const API_URL = process.env.API_URL;
-// const REDIS_URL = process.env.REDIS_URL;
+ 
 
 //  this will send API_URL and API_KEY to frontend
 router.get("/config", (req, res) => {
@@ -22,10 +19,7 @@ router.get("/config", (req, res) => {
 // fetch all blogs
 router.get('/', async (req, res) => {
      try{
-    
     const blogs = await Blog.find().sort({ createdAt: -1 });
-
-     
     res.json(blogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
