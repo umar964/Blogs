@@ -2,16 +2,18 @@ const express = require('express');
 const router = express.Router();
 const Blog = require('../models/Blog');
 const User = require("../models/userModel");
+const axios = require('axios');
+const OpenAI = require('openai');
 const  adminMiddleware = require('../middleware/adminMiddleware');
 require("dotenv").config();
 
-const API_KEY = process.env.API_KEY;
-const API_URL = process.env.API_URL;
+ 
  
 
 //  this will send API_URL and API_KEY to frontend
 router.get("/config", (req, res) => {
-    res.json({ API_URL,API_KEY });
+    alert("at backend upi and url are",API_KEY,API_URL);
+    res.json({API_KEY});
 });
 
 
@@ -108,6 +110,49 @@ router.post('/search-blogs', async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   });
+
+
+ 
+
+ 
+
+
+ 
+
+ 
+
+router.post("/generate-blog", async (req, res) => {
+  const { title } = req.body;
+  const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
+  const DEEPINFRA_API_KEY = process.env.DEEPINFRA_KEY; // Get from https://deepinfra.com/
+
+  try {
+    const response = await axios.post(
+      DEEPINFRA_URL,
+      {
+        model: "mistralai/Mistral-7B-Instruct-v0.1",
+        messages: [{
+          role: "user",
+          content: `Write a detailed blog post about "${title}" in Markdown.`
+        }],
+        max_tokens: 1000
+      },
+      {
+        headers: {
+          "Authorization": `Bearer ${DEEPINFRA_API_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    res.json({ content: response.data.choices[0].message.content });
+  } catch (error) {
+    console.error("DeepInfra Error:", error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to generate blog." });
+  }
+});
+
+ 
+
 
  
 

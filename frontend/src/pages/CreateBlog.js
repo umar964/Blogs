@@ -9,22 +9,33 @@ const CreateBlog = () => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [author, setAuthor] = useState("");
-    const [apiConfig, setApiConfig] = useState({ API_URL: "", API_KEY: "" });
+    // const [apiConfig, setApiConfig] = useState({ API_KEY: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);  // To store any error message
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+    // const API_URL = "https://api-inference.huggingface.co/models/gpt2";
+ 
+     
 
  
 
    
-    useEffect(() => {
-        //  get the API_URL and API_KEY from backend .env file through config route
-        axios.get(`${BACKEND_URL}/api/blogs/config`)  
-            .then((res) => setApiConfig(res.data))
-            .catch((err) => console.error("Error fetching API config:", err));
-    }, []);
+    // useEffect(() => {
+    //     //  get the API_URL and API_KEY from backend .env file through config route
+    //     setLoading(true);
+    //     axios.get(`${BACKEND_URL}/api/blogs/config`)  
+    //         .then((res) => {
+    //             console.log("Backend response:", res.data);
+    //             setApiConfig(res.data);
+    //             setLoading(false);
+    //         })
+    //         .catch((err) =>{
+    //             console.error("Error fetching API config:", err);
+    //            setLoading(false);
+    //         });
+    // }, []);
 
 
     
@@ -35,51 +46,39 @@ const CreateBlog = () => {
  
 
     // Function to fetch AI-generated content
-    const generateContent = async () => {
-    
-        if (!title) {
-            alert("Please enter a title first!");
-            return;
-        }
 
-        if (!apiConfig.API_URL || !apiConfig.API_KEY) {
-            alert("API config not loaded");
-            return;
-        }
+const generateContent = async () => {
+  if (!title) {
+    alert("Please enter a title first!");
+    return;
+  }
+
+  setLoading(true);
+  setError(null);
+
+  try {
+    const response = await axios.post("http://localhost:5000/api/blogs/generate-blog", {
+      title,
+    });
+
+    setContent(response.data.content);
+  } catch (error) {
+    console.error("Error calling backend:", error);
+    setError("Failed to generate blog content. Try again later.");
+  }
+
+  setLoading(false);
+};
+
+
+
+
+
+
+
+ 
+
     
-        setLoading(true);
-    
-        try {
-            const response = await axios.post(apiConfig.API_URL,
-                 
-                {
-                    inputs: `Write a blog on ${title} as if you are casually sharing your thoughts with a friend. Use simple words, personal opinions, and a natural flow. Add humor, questions, and a mix of short and long sentences. Avoid making it sound robotic or overly structured. Don't include this title in the content.`
-                },
-                
-                
-                {
-                    headers: {
-                        Authorization: `Bearer ${apiConfig.API_KEY}`,
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
-    
-            
-            if (response.data && response.data[0]?.generated_text) {
-                setContent(response.data[0].generated_text);
-            } else {
-                setContent("No content generated. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error generating blog:", error.response || error);
-    
-             
-           
-        }
-    
-        setLoading(false);
-    };
 
     
     
