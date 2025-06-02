@@ -27,7 +27,7 @@ const Home = () => {
         setError(null);
         
         try {
-            const res = await axios.get(`http://localhost:5000/api/blogs?page=${page}&limit=5`);
+            const res = await axios.get(`${BACKEND_URL}/api/blogs?page=${page}&limit=5`);
  
             const fetchedBlogs = res.data.blogs;  // ye array hai
             const hasMoreBlogs = res.data.hasMore;
