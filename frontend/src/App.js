@@ -7,10 +7,11 @@ import EditBlog from "./pages/EditBlog";
 import CreateAdmin from "./pages/CreateAdmin";
 import AdminLogin from "./pages/LoginAdmin";
 import AdminProtected from "./pages/AdminProtected";
-import './APP.css'
 import axios from 'axios';
 import SearchBlogs from "./pages/SearchBlogs";
 import RemoveAdmin from "./pages/RemoveAdmin";
+import MobileMenu from "./components/MobileMenu";
+import './APP.css'
  
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
     window.location.href = "/login-admin"; 
 };
 
+ 
+
 
  
 
@@ -63,19 +66,23 @@ function App() {
     <>
       <nav>
          
+         
         <div className="nav-div">
         <Link to="/">Home</Link>
         {token && isAdmin === "true" && (
           <>
            <Link to="/create">Create Blog</Link>
            <Link to="/create-admin">Create Admin</Link>
-           <button onClick={handleLogout}>Logout</button>
+           <Link onClick={handleLogout}>Logout</Link>
            <Link to="/remove-admin">Remove Admin</Link>
             
            </>
         )}
-            <Link to = "/login-admin">Login</Link>
+        {!token && (
+          <Link to = "/login-admin">Login</Link>
+        )}
         </div>
+        
         <div className="search">
         <form onSubmit={handleSearch} className="search-form">
             <input
@@ -87,8 +94,12 @@ function App() {
             />
              
           </form>
+          <MobileMenu/>
+           
         </div>
       </nav>
+
+       
       <Routes>
 
       <Route path="/" element={<Home/>} />

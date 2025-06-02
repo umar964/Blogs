@@ -15,34 +15,6 @@ const CreateBlog = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
-    // const API_URL = "https://api-inference.huggingface.co/models/gpt2";
- 
-     
-
- 
-
-   
-    // useEffect(() => {
-    //     //  get the API_URL and API_KEY from backend .env file through config route
-    //     setLoading(true);
-    //     axios.get(`${BACKEND_URL}/api/blogs/config`)  
-    //         .then((res) => {
-    //             console.log("Backend response:", res.data);
-    //             setApiConfig(res.data);
-    //             setLoading(false);
-    //         })
-    //         .catch((err) =>{
-    //             console.error("Error fetching API config:", err);
-    //            setLoading(false);
-    //         });
-    // }, []);
-
-
-    
-    
- 
-    
-
  
 
     // Function to fetch AI-generated content

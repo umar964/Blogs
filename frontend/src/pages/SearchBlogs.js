@@ -11,17 +11,24 @@ const  SearchBlogs = ({searchResults}) => {
                 <p className="home-empty-message">No result found.</p>
             ) : (
                 searchResults.map(blog => (
-                    <div key={blog._id} className="blog-card">
+                     <Link to={`/blog/${blog.slug}`} key={blog._id} className='full-div'>
+                     <div   className="blog-card">
                         <h2 className="blog-card-title">
-                            {/*  title become link */}
-                            <Link to={`/blog/${blog._id}`} className="blog-card-link">
-                                {blog.title}
-                            </Link>
+                            {blog.title}
+                            
                         </h2>
-                        <p className="blog-card-content">
+                        <p className="blog-card-content"  style={{fontFamily: 'Georgia, serif'}}>
                             {/* small portion of content will display and rest will hide */}
-                            {blog.content.substring(0, 100)}...</p>
+                            {blog.content.substring(0, 175)}...
+                             <span
+                                className="read-more"
+                                style={{ color: "green", textDecoration: "none", marginLeft: "5px" }}
+                                >
+                                Read More
+                                </span> 
+                            </p>
                     </div>
+                     </Link>
                 ))
             )}
         </div>

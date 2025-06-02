@@ -9,35 +9,67 @@ require("dotenv").config();
 
  
  
+// for related blogs in blogDetails page
+ router.get("/all-blogs",async(req,res)=>{
 
-//  this will send API_URL and API_KEY to frontend
-router.get("/config", (req, res) => {
-    alert("at backend upi and url are",API_KEY,API_URL);
-    res.json({API_KEY});
-});
-
-
-
-// fetch all blogs
-router.get('/', async (req, res) => {
-     try{
-    const blogs = await Blog.find().sort({ createdAt: -1 });
-    res.json(blogs);
+   try{
+    const allBlogs = await Blog.find().sort({ createdAt:-1 })
+    res.json(allBlogs);
      }catch(error){
         console.error("Error fetching blogs:", error);
         res.status(500).json({ message: "Server Error" });
      }
+
+ })
+
+
+// fetch all blogs for landing page
+router.get("/", async (req, res) => {
+
+  
+ 
+   
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+
+  
+
+     try{
+    const blogs = await Blog.find()
+      .sort({ createdAt:-1 })
+      .skip(skip)
+      .limit(limit+1);
+     
+
+     
+    const hasMore = blogs.length > limit;
+    const results = hasMore ? blogs.slice(0, limit) : blogs;
+     
+ 
+    res.json({
+      blogs:results,
+      hasMore
+    });
+     }catch(error){
+        console.error("Error fetching blogs:", error);
+        res.status(500).json({ message: "Server Error" });
+     }
+
+   
 });
 
 
 // //  Get a single blog by  blog slug  and this will fetch the blog when u click on title on home page
 router.get('/:slug',  async (req, res) => {
     try {
-         
+   
         const blog = await Blog.findOne({ slug: req.params.slug }); 
         if (!blog) {
             return res.status(404).json({ message: 'Blog Not Found' });
         }
+         
         res.json(blog);
     } catch (error) {
         res.status(500).json({ message: 'Server Error' });
@@ -55,7 +87,7 @@ router.post('/', adminMiddleware, async (req, res) => {
         // Save karne se pehle slug middleware trigger hoga
         await newBlog.save();
         // Clear cache so that new blogs appear immediately
-        // redis.del("all_blogs");
+        
 
         res.status(201).json(newBlog);
     } catch (error) {
