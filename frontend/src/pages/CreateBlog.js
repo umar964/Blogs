@@ -29,7 +29,7 @@ const generateContent = async () => {
   setError(null);
 
   try {
-    const response = await axios.post("http://localhost:5000/api/blogs/generate-blog", {
+    const response = await axios.post(`${BACKEND_URL}/api/blogs/generate-blog`, {
       title,
     });
 
