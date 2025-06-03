@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const MobileMenu = () => {
 
     const [menuOpen,setMenuOpen] = useState(false);
+  
 
     const token = localStorage.getItem("token");
     const isAdmin = localStorage.getItem("isAdmin");
@@ -15,17 +16,22 @@ const MobileMenu = () => {
     localStorage.removeItem("token");  
     localStorage.removeItem("isAdmin");  
     window.location.href = "/login-admin"; 
-};
+  };
+ 
+
+ 
+
+
 
     return(
             <>
-            <button className='menu-toggle' onClick={()=>setMenuOpen(!menuOpen)}>
+            <button className='menu-toggle' onClick={()=>setMenuOpen(!menuOpen)} >
                 ☰
             </button>
 
-            {menuOpen &&(
-            <div className="mobile-menu">
-            <button onClick={() => setMenuOpen(false)}>✕</button>
+            {menuOpen  &&(
+            <div className="mobile-menu" onClick={() => setMenuOpen(false)}>
+            <button>✕</button>
             <ul>
             <li><Link to="/">Home</Link></li>
             {token && isAdmin === "true" && (

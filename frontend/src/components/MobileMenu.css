@@ -81,15 +81,26 @@
     .menu-toggle{
       display: block;
       /* margin-right: -px; */
-      
+      /* width: 8vw; */
+      /* margin-right: 6vw; */
     }
     .search{
       display: flex;
-      width: 90vw;
+      width: 95vw;
       justify-content: space-between;
        
       align-items: center;
       padding-left: 2vw;
       padding-right: 1vw;
+    }
+  }
+
+  @media(max-width:435px){
+    
+   
+    .menu-toggle{
+      font-size: 7vw;
+      /* margin-right: 5vw; */
+       
     }
   }
