@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./CreateBlog.css"; // Import CSS file
@@ -32,6 +32,7 @@ const generateContent = async () => {
     const response = await axios.post(`${BACKEND_URL}/api/blogs/generate-blog`, {
       title,
     });
+    console.log("response",response.data.content)
 
     setContent(response.data.content);
   } catch (error) {
