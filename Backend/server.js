@@ -14,7 +14,7 @@ app.use(express.json());
 
 // cors refer to cross origin resource sharing 
 // CORS allows our frontend (React) to communicate with our backend (Node.js) on a different domain (like localhost:3000 to localhost:5000).
-// if cors is not enabled, the browser block the request 
+// if cors is not enabled, then browser block the request 
 app.use(cors());
 
 
