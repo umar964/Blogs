@@ -158,9 +158,12 @@ router.post("/generate-blog", async (req, res) => {
   const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
   const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY; // Get from https://deepinfra.com/
   // DEEPINFRA_KEY = "7tX6vCAvU8QDu25CGfKGOKhQ3yLj31Zp";
+
+  console.log(DEEPINFRA_KEY);
    
 
   try {
+
     const response = await axios.post(
       DEEPINFRA_URL,
       {
