@@ -15,6 +15,8 @@ const CreateBlog = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem('token')
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+    const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
+    const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY;
  
 
     // Function to fetch AI-generated content
@@ -28,16 +30,32 @@ const generateContent = async () => {
   setLoading(true);
   setError(null);
 
-  try {
-    const response = await axios.post(`${BACKEND_URL}/api/blogs/generate-blog`, {
-      title,
-    });
-    console.log("response",response.data.content)
 
-    setContent(response.data.content);
+
+  try {
+
+    const response = await axios.post(
+      DEEPINFRA_URL,
+      {
+        model: "mistralai/Mistral-7B-Instruct-v0.1",
+        messages: [{
+          role: "user",
+          content: `Write a detailed blog post about "${title}" in Markdown.`
+        }],
+        max_tokens: 1000
+      },
+      {
+        headers: {
+          "Authorization": `Bearer ${DEEPINFRA_KEY}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    console.log(response.data);
+    setContent(response.data);
   } catch (error) {
-    console.error("Error calling backend:", error);
-    setError("Failed to generate blog content. Try again later.");
+    console.log("Error creating blogs",error);
+    setError("Failed to create blog,please try again later")
   }
 
   setLoading(false);
