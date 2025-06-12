@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 const axios = require('axios');
 const OpenAI = require('openai');
 const  adminMiddleware = require('../middleware/adminMiddleware');
-require("dotenv").config();
+ 
 
  
  
