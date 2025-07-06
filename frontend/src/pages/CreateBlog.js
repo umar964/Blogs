@@ -51,11 +51,11 @@ const generateContent = async () => {
         }
       }
     );
-    console.log(response.data);
+    console.log(response.content);
     setContent(response.data);
   } catch (error) {
     console.log("Error creating blogs",error);
-    setError("Failed to create blog,please try again later")
+    setError("Failed to generate blog,please try again later")
   }
 
   setLoading(false);
