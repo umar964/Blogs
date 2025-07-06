@@ -153,37 +153,37 @@ router.post('/search-blogs', async (req, res) => {
 
  
 
-router.post("/generate-blog", async (req, res) => {
-  const { title } = req.body;
-  const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
-  // const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY; // Get from https://deepinfra.com/
-  const DEEPINFRA_KEY = "287X0dBhcRzcMRT21nV8qtt7mnE3zlTr";
+// router.post("/generate-blog", async (req, res) => {
+//   const { title } = req.body;
+//   const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
+//   // const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY; // Get from https://deepinfra.com/
+//   const DEEPINFRA_KEY = "287X0dBhcRzcMRT21nV8qtt7mnE3zlTr";
  
-  try {
+//   try {
 
-    const response = await axios.post(
-      DEEPINFRA_URL,
-      {
-        model: "mistralai/Mistral-7B-Instruct-v0.1",
-        messages: [{
-          role: "user",
-          content: `Write a detailed blog post about "${title}" in Markdown.`
-        }],
-        max_tokens: 1000
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${DEEPINFRA_KEY}`,
-          "Content-Type": "application/json"
-        }
-      }
-    );
-    res.json({ content: response.data.choices[0].message.content });
-  } catch (error) {
-    console.error("DeepInfra Error:", error.response?.data || error.message);
-    res.status(500).json({ error: "Failed to generate blog." });
-  }
-});
+//     const response = await axios.post(
+//       DEEPINFRA_URL,
+//       {
+//         model: "mistralai/Mistral-7B-Instruct-v0.1",
+//         messages: [{
+//           role: "user",
+//           content: `Write a detailed blog post about "${title}" in Markdown.`
+//         }],
+//         max_tokens: 1000
+//       },
+//       {
+//         headers: {
+//           "Authorization": `Bearer ${DEEPINFRA_KEY}`,
+//           "Content-Type": "application/json"
+//         }
+//       }
+//     );
+//     res.json({ content: response.data.choices[0].message.content });
+//   } catch (error) {
+//     console.error("DeepInfra Error:", error.response?.data || error.message);
+//     res.status(500).json({ error: "Failed to generate blog." });
+//   }
+// });
 
  
 

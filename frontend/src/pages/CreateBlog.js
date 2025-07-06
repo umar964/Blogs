@@ -16,7 +16,7 @@ const CreateBlog = () => {
     const token = localStorage.getItem('token')
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
     const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
-    const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY;
+    const DEEPINFRA_KEY = "287X0dBhcRzcMRT21nV8qtt7mnE3zlTr";
  
 
     // Function to fetch AI-generated content
