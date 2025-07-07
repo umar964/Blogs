@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 const axios = require('axios');
 const OpenAI = require('openai');
 const  adminMiddleware = require('../middleware/adminMiddleware');
- const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY;
+ const DEEPINFRA_KEYs = process.env.DEEPINFRA_KEY;
  
 
  
@@ -157,7 +157,8 @@ router.post('/search-blogs', async (req, res) => {
 router.post("/generate-blog", async (req, res) => {
   const { title } = req.body;
   
-  const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
+  const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions";
+  const DEEPINFRA_KEY='287X0dBhcRzcMRT21nV8qtt7mnE3zlTr';
   // const DEEPINFRA_KEY = process.env.DEEPINFRA_KEY; // Get from https://deepinfra.com/
   
  
