@@ -34,28 +34,15 @@ const generateContent = async () => {
 
   try {
 
-    const response = await axios.post(
-      DEEPINFRA_URL,
-      {
-        model: "mistralai/Mistral-7B-Instruct-v0.1",
-        messages: [{
-          role: "user",
-          content: `Write a detailed blog post about "${title}" in Markdown.`
-        }],
-        max_tokens: 1000
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${DEEPINFRA_KEY}`,
-          "Content-Type": "application/json"
-        }
-      }
+    const response = await axios.post(`${BACKEND_URL}/api/blogs/generate-blog`,{title}      
     );
-    console.log(response.content);
-    setContent(response.data);
+    console.log("response",response.data);
+    console.log("r data",response.data);
+    console.log("r content",response.content);
+    setContent(response.data.content);
   } catch (error) {
     console.log("Error creating blogs",error);
-    setError("Failed to generate blog,please try again later")
+    setError("Failed to generate blog , please try again later.")
   }
 
   setLoading(false);
@@ -96,7 +83,7 @@ const generateContent = async () => {
     return (
         <div className="create-blog-container">
             <h1 className="create-blog-title">Create New Blog</h1>
-            {error && <div className="error-message">{error}</div>} {/* Display error messages */}
+            {error && <div className="error-message " style={{color:"red", textAlign:"center",marginBottom:"12px"}}>{error}</div>} {/* Display error messages */}
             <form onSubmit={handleSubmit} className="create-blog-form">
                 <input
                     type="text"
