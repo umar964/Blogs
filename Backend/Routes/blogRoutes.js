@@ -81,6 +81,13 @@ router.get('/:slug',  async (req, res) => {
 router.post('/', adminMiddleware, async (req, res) => {
     try {
         const { title, content, author } = req.body;
+        
+        const isSame = await Blog.find({title});
+        console.log("same ",isSame);
+        if(isSame.length>0){
+         return res.status(400).json({error:"Title already exists. Please change it."});
+          
+        }
 
         // Naya blog create karo
         const newBlog = new Blog({ title, content, author });

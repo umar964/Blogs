@@ -16,7 +16,7 @@ const CreateBlog = () => {
     const token = localStorage.getItem('token')
     const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
     const DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
-    const DEEPINFRA_KEY = "287X0dBhcRzcMRT21nV8qtt7mnE3zlTr";
+   
  
 
     // Function to fetch AI-generated content
@@ -36,9 +36,7 @@ const generateContent = async () => {
 
     const response = await axios.post(`${BACKEND_URL}/api/blogs/generate-blog`,{title}      
     );
-    console.log("response",response.data);
-    console.log("r data",response.data);
-    console.log("r content",response.content);
+  
     setContent(response.data.content);
   } catch (error) {
     console.log("Error creating blogs",error);
@@ -72,11 +70,14 @@ const generateContent = async () => {
             },
             {headers: { Authorization: `Bearer ${token}` }}
         );
-            alert("Blog added successfully!");
+           alert("Blog added successfully!");
             navigate("/");
         } catch (error) {
-            console.error("Error adding blog:", error);
+        if (error.response && error.response.data && error.response.data.error) {
+            setError(error.response.data.error);  // show actual backend error
+        } else {
             setError("Error adding blog. Try again later.");
+        }
         }
     };
 
